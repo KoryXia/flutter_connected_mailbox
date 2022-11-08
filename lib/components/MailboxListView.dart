@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/controller/MailboxListController.dart';
-import 'package:flutter_connected_mailbox/controller/AppConfigController.dart';
 import 'package:get/get.dart';
 
 class MailboxListView extends StatelessWidget {
@@ -12,69 +11,72 @@ class MailboxListView extends StatelessWidget {
     return;
   }
 
-  Obx _buildList(int index) {
-    return Obx(() => Container(
-          decoration: BoxDecoration(
-            color: Get.find<AppConfigController>().currentMode.value == 'light'
-                ? Colors.white
-                : const Color(0XFF353535),
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 6,
-                spreadRadius: 1,
-                color: Colors.black45,
-                offset: Offset(0, 1),
-              )
-            ],
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  const SizedBox(width: 45),
-                  Image.network(
-                    'https://picsum.photos/seed/359/600',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(width: 35),
-                  Column(
-                    children: [
-                      Text(
-                        Get.find<MailboxListController>()
-                                .mailboxList
-                                .value
-                                .data?[index]
-                                .nickname ??
-                            '',
-                        style: const TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 35,
+  Builder _buildList(int index) {
+    return Builder(
+        builder: (context) {
+          return Container(
+            decoration: BoxDecoration(
+              color: MediaQuery.of(context).platformBrightness == Brightness.light
+                  ? Colors.white
+                  : const Color(0XFF353535),
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                  color: Colors.black45,
+                  offset: Offset(0, 1),
+                )
+              ],
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const SizedBox(width: 45),
+                    Image.network(
+                      'https://picsum.photos/seed/359/600',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(width: 35),
+                    Column(
+                      children: [
+                        Text(
+                          Get.find<MailboxListController>()
+                              .mailboxList
+                              .value
+                              .data?[index]
+                              .nickname ??
+                              '',
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 35,
+                          ),
                         ),
-                      ),
-                      Text(
-                        Get.find<MailboxListController>()
-                                .mailboxList
-                                .value
-                                .data?[index]
-                                .screenInfo ??
-                            '',
-                        style: const TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 15,
+                        Text(
+                          Get.find<MailboxListController>()
+                              .mailboxList
+                              .value
+                              .data?[index]
+                              .screenInfo ??
+                              '',
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(height: 10),
-            ],
-          ),
-        ));
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          );
+        }
+    );
   }
 
   @override

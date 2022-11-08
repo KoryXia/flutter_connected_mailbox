@@ -6,6 +6,6 @@ class AllControllersBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<MailboxListController>(() => MailboxListController());
-    Get.lazyPut<AppConfigController>(() => AppConfigController(), fenix: true);
+    Get.lazyPut<AppConfigController>(() => AppConfigController());
   }
 }

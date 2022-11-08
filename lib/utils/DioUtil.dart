@@ -10,8 +10,8 @@ class DioUtil {
       : _dio = Dio(
     BaseOptions(
       baseUrl: 'http://192.168.0.147:8080/api/',
-      connectTimeout: 10000,
-      receiveTimeout: 10000,
+      connectTimeout: 6000,
+      receiveTimeout: 6000,
       responseType: ResponseType.json
     )
   );

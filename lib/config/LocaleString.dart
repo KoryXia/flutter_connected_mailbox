@@ -10,12 +10,10 @@ class LocaleString extends Translations {
           'no_data': 'No data',
           'new_letter': 'New letter!',
           'mailbox': 'Mailbox',
-          'theme': 'Theme',
-          'light_mode': 'Light mode',
-          'dark_mode': 'Dark mode',
           'lang': 'Language',
           'refresh': 'Refresh',
           'setting': 'Setting',
+          'logout': 'Log out',
         },
         'fr_FR': {
           'confirm': 'Confirmer',
@@ -24,12 +22,10 @@ class LocaleString extends Translations {
           'no_data': 'Aucune donnée',
           'new_letter': 'Nouvelle lettre!',
           'mailbox': 'Boîte aux lettres',
-          'theme': 'Thème',
-          'light_mode': 'Le thème clair',
-          'dark_mode': 'Le thème sombre',
           'lang': 'Langue',
           'refresh': 'Mise à jour',
           'setting': 'Réglages',
+          'logout': 'Se déconnecter'
         }
       };
 }

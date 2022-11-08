@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/controller/AllControllersBinding.dart';
 import 'package:flutter_connected_mailbox/pages/MainPage.dart';
+import 'package:flutter_connected_mailbox/pages/WelcomePage.dart';
 import 'package:flutter_connected_mailbox/theme/color_schemes.g.dart';
 import 'package:get/get.dart';
 import 'package:flutter_connected_mailbox/config/LocaleString.dart';
 import 'package:get_storage/get_storage.dart';
+
 
 void main() async {
   await GetStorage.init();
@@ -12,19 +14,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  bool lang =
-      GetStorage().read('lang') == 'fr' || GetStorage().read('lang') == null;
-  bool mode =
-      GetStorage().read('mode') == 'light' || GetStorage().read('mode') == null;
+  final bool lang =
+      GetStorage().read('mode') == 'fr' || GetStorage().read('lang') == null;
 
   MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: mode
-          ? ThemeData(useMaterial3: true, colorScheme: lightColorScheme)
-          : ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+      theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       debugShowCheckedModeBanner: false,
       initialBinding: AllControllersBinding(),
       translations: LocaleString(),

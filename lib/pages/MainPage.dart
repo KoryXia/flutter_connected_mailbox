@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_connected_mailbox/pages/QRcodePage.dart';
 import 'package:get/get.dart';
 import 'package:flutter_connected_mailbox/components/MailboxListView.dart';
 import 'package:flutter_connected_mailbox/components/UserInfoView.dart';
@@ -17,12 +18,11 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    init();
     return Obx(() => Scaffold(
           appBar: AppBar(
             title: const Text(
               'NORALSY',
-              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
             ),
             centerTitle: true,
           ),
@@ -45,7 +45,7 @@ class MainPage extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => Get.to(() => const QRCodePage()),
             child: const Icon(Icons.add),
           ),
           floatingActionButtonLocation:
@@ -56,7 +56,8 @@ class MainPage extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeader(
-                    child: Text('setting'.tr, style: const TextStyle(fontSize: 35)),
+                    child: Text('setting'.tr,
+                        style: const TextStyle(fontSize: 35)),
                   ),
                   ExpansionTile(
                     leading: const Icon(Icons.language),
@@ -69,9 +70,10 @@ class MainPage extends StatelessWidget {
                                     'fr'
                                 ? const Icon(Icons.check)
                                 : null,
-                        onTap: () => Get.find<AppConfigController>().changeLang('fr','FR'),
+                        onTap: () => Get.find<AppConfigController>()
+                            .changeLang('fr', 'FR'),
                       ),
-                      const Divider(height: 1,thickness: 1),
+                      const Divider(height: 1, thickness: 1),
                       ListTile(
                         title: const Text('English'),
                         trailing:
@@ -79,40 +81,12 @@ class MainPage extends StatelessWidget {
                                     'en'
                                 ? const Icon(Icons.check)
                                 : null,
-                        onTap: () => Get.find<AppConfigController>().changeLang('en','US'),
+                        onTap: () => Get.find<AppConfigController>()
+                            .changeLang('en', 'US'),
                       )
                     ],
                   ),
-                  const Divider(height: 1,thickness: 1),
-                  ExpansionTile(
-                    leading:
-                        Get.find<AppConfigController>().currentMode.value ==
-                                'light'
-                            ? const Icon(Icons.light_mode)
-                            : const Icon(Icons.dark_mode),
-                    title: Text('theme'.tr),
-                    children: [
-                      ListTile(
-                        title: Text('light_mode'.tr),
-                        onTap: () => Get.find<AppConfigController>().changeMode('light'),
-                        trailing:
-                            Get.find<AppConfigController>().currentMode.value ==
-                                    'light'
-                                ? const Icon(Icons.check)
-                                : null,
-                      ),
-                      const Divider(height: 1,thickness: 1),
-                      ListTile(
-                        title: Text('dark_mode'.tr),
-                        onTap: () => Get.find<AppConfigController>().changeMode('dark'),
-                        trailing:
-                            Get.find<AppConfigController>().currentMode.value ==
-                                    'dark'
-                                ? const Icon(Icons.check)
-                                : null,
-                      )
-                    ],
-                  )
+                  const Divider(height: 1, thickness: 1),
                 ],
               ),
             );
