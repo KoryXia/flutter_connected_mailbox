@@ -1,76 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/controller/MailboxListController.dart';
+import 'package:flutter_connected_mailbox/controller/AppConfigController.dart';
 import 'package:get/get.dart';
 
 class MailboxListView extends StatelessWidget {
   const MailboxListView({Key? key}) : super(key: key);
 
-  Future<Null> _onRefresh() async {
-    await Future.delayed(const Duration(seconds: 1));
+  Future<void> _onRefresh() async {
+    await Future.delayed(const Duration(microseconds: 500));
     Get.find<MailboxListController>().getMailboxList();
-    return null;
+    return;
   }
 
-  Container _build(int index) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 4,
-            color: Colors.grey,
-            offset: Offset(0, 2),
-          )
-        ],
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              const SizedBox(width: 45),
-              Image.network(
-                'https://picsum.photos/seed/359/600',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(width: 35),
-              Column(
-                children: [
-                  Text(
-                    Get.find<MailboxListController>()
-                            .mailboxList
-                            .value
-                            .data?[index]
-                            .nickname ??
-                        '',
-                    style: const TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 35,
-                    ),
-                  ),
-                  Text(
-                    Get.find<MailboxListController>()
-                        .mailboxList
-                        .value
-                        .data?[index]
-                        .screenInfo ??
-                        '',
-                    style: const TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
+  Obx _buildList(int index) {
+    return Obx(() => Container(
+          decoration: BoxDecoration(
+            color: Get.find<AppConfigController>().currentMode.value == 'light'
+                ? Colors.white
+                : const Color(0XFF353535),
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 6,
+                spreadRadius: 1,
+                color: Colors.black45,
+                offset: Offset(0, 1),
               )
             ],
+            borderRadius: BorderRadius.circular(16),
           ),
-          const SizedBox(height: 10),
-        ],
-      ),
-    );
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const SizedBox(width: 45),
+                  Image.network(
+                    'https://picsum.photos/seed/359/600',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(width: 35),
+                  Column(
+                    children: [
+                      Text(
+                        Get.find<MailboxListController>()
+                                .mailboxList
+                                .value
+                                .data?[index]
+                                .nickname ??
+                            '',
+                        style: const TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 35,
+                        ),
+                      ),
+                      Text(
+                        Get.find<MailboxListController>()
+                                .mailboxList
+                                .value
+                                .data?[index]
+                                .screenInfo ??
+                            '',
+                        style: const TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        ));
   }
 
   @override
@@ -106,6 +110,7 @@ class MailboxListView extends StatelessWidget {
                     },
                     child: Column(
                       children: [
+                        const SizedBox(height: 20),
                         Get.find<MailboxListController>()
                                     .mailboxList
                                     .value
@@ -115,10 +120,9 @@ class MailboxListView extends StatelessWidget {
                             ? Banner(
                                 message: 'new_letter'.tr,
                                 location: BannerLocation.topEnd,
-                                child: _build(index),
+                                child: _buildList(index),
                               )
-                            : _build(index),
-                        const SizedBox(height: 20)
+                            : _buildList(index),
                       ],
                     ),
                   );
@@ -139,6 +143,10 @@ class MailboxListView extends StatelessWidget {
                 Text(
                   'no_data'.tr,
                   style: const TextStyle(fontSize: 20),
+                ),
+                TextButton(
+                  onPressed: _onRefresh,
+                  child: Text('refresh'.tr),
                 )
               ],
             ),

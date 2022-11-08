@@ -27,7 +27,7 @@ class DioUtil {
     } on DioError catch (err) {
       Get.defaultDialog(
         title: 'http_error_title'.tr,
-        content: Text('http_error'.tr),
+        middleText: 'http_error'.tr,
         confirm: ElevatedButton(onPressed: Get.back, child: Text('confirm'.tr))
       );
       throw err.message;
