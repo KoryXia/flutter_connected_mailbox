@@ -12,8 +12,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  bool lang = GetStorage().read('lang') == 'fr' || GetStorage().read('lang') == null;
-  bool mode = GetStorage().read('mode') == 'light' || GetStorage().read('mode') == null;
+  bool lang =
+      GetStorage().read('lang') == 'fr' || GetStorage().read('lang') == null;
+  bool mode =
+      GetStorage().read('mode') == 'light' || GetStorage().read('mode') == null;
 
   MyApp({Key? key}) : super(key: key);
 

@@ -31,10 +31,12 @@ class AppConfigController extends GetxController {
       box.write('mode', mode);
       switch (mode) {
         case 'light':
-          Get.changeTheme(ThemeData(useMaterial3: true, colorScheme: lightColorScheme));
+          Get.changeTheme(
+              ThemeData(useMaterial3: true, colorScheme: lightColorScheme));
           break;
         case 'dark':
-          Get.changeTheme(ThemeData(useMaterial3: true, colorScheme: darkColorScheme));
+          Get.changeTheme(
+              ThemeData(useMaterial3: true, colorScheme: darkColorScheme));
           break;
       }
     }
