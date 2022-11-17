@@ -9,7 +9,7 @@ class DioUtil {
   DioUtil()
       : _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.0.147:8080/api/',
+      baseUrl: 'http://172.28.31.50:8080/api/',
       connectTimeout: 6000,
       receiveTimeout: 6000,
       responseType: ResponseType.json

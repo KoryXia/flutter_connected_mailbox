@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_connected_mailbox/pages/LoginPage.dart';
 import 'package:flutter_connected_mailbox/pages/MainPage.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +38,7 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 1000), () {
-      Get.offAll(const MainPage(),
+      Get.offAll(() => LoginPage(),
           transition: Transition.zoom,
           duration: const Duration(milliseconds: 500));
     });

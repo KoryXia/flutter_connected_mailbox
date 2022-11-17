@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/controller/AllControllersBinding.dart';
+import 'package:flutter_connected_mailbox/pages/LoginPage.dart';
 import 'package:flutter_connected_mailbox/pages/MainPage.dart';
 import 'package:flutter_connected_mailbox/pages/WelcomePage.dart';
 import 'package:flutter_connected_mailbox/theme/color_schemes.g.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       translations: LocaleString(),
       locale: lang ? const Locale('fr', 'FR') : const Locale('en', 'US'),
       fallbackLocale: const Locale('fr', 'FR'),
-      home: const MainPage(),
+      home: const WelcomePage(),
     );
   }
 }

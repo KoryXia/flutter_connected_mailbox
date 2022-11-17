@@ -13,7 +13,9 @@ class LocaleString extends Translations {
           'lang': 'Language',
           'refresh': 'Refresh',
           'setting': 'Setting',
-          'logout': 'Log out',
+          'login_out': 'Login out',
+          'login_in': 'Login in',
+          'save_my_phone': 'Save my phone number'
         },
         'fr_FR': {
           'confirm': 'Confirmer',
@@ -25,7 +27,9 @@ class LocaleString extends Translations {
           'lang': 'Langue',
           'refresh': 'Mise à jour',
           'setting': 'Réglages',
-          'logout': 'Se déconnecter'
+          'logout': 'Se déconnecter',
+          'login_in': 'Se connecter',
+          'save_my_phone': 'Enregistrer mon numéro de téléphone'
         }
       };
 }
