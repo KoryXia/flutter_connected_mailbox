@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/pages/LoginPage.dart';
 import 'package:flutter_connected_mailbox/pages/MainPage.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -21,8 +22,8 @@ class _WelcomePageState extends State<WelcomePage> {
           direction: Axis.vertical,
           children: [
             SizedBox(
-              child: Image.network(
-                'https://www.noralsy.com/wp-content/uploads/2022/03/logo-NORALSY-2022.png',
+              child: Image.asset(
+                'logo-NORALSY-2022.png',
                 height: 100,
                 width: 300,
               ),
@@ -38,9 +39,16 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 1000), () {
-      Get.offAll(() => LoginPage(),
-          transition: Transition.zoom,
-          duration: const Duration(milliseconds: 500));
+      var box = GetStorage();
+      if (box.hasData('userId')) {
+        Get.offAll(() => const MainPage(),
+            transition: Transition.zoom,
+            duration: const Duration(milliseconds: 500));
+      } else {
+        Get.offAll(() => const LoginPage(),
+            transition: Transition.zoom,
+            duration: const Duration(milliseconds: 500));
+      }
     });
   }
 }

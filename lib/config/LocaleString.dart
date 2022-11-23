@@ -13,9 +13,17 @@ class LocaleString extends Translations {
           'lang': 'Language',
           'refresh': 'Refresh',
           'setting': 'Setting',
-          'login_out': 'Login out',
-          'login_in': 'Login in',
-          'save_my_phone': 'Save my phone number'
+          'logout': 'Logout',
+          'login': 'Login',
+          'login_error': 'Please confirm your phone number and password',
+          'phone': 'Phone number',
+          'phone_input': 'Please enter phone number',
+          'password': 'Password',
+          'password_input': 'Please enter password',
+          'loading': 'Loading...',
+          'empty_input': 'Input can not be empty',
+          'forget': 'Forget the password?',
+          'new_letter_action': 'Click me to check.'
         },
         'fr_FR': {
           'confirm': 'Confirmer',
@@ -28,8 +36,16 @@ class LocaleString extends Translations {
           'refresh': 'Mise à jour',
           'setting': 'Réglages',
           'logout': 'Se déconnecter',
-          'login_in': 'Se connecter',
-          'save_my_phone': 'Enregistrer mon numéro de téléphone'
+          'login': 'Se connecter',
+          'login_error': 'Veuillez confirmer votre numéro de téléphone et votre mot de passe',
+          'phone': 'Numéro de téléphone',
+          'phone_input': 'Veuillez entrer le numéro de téléphone',
+          'password': 'Le mot de passe',
+          'password_input': 'Veuillez entrer le mot de passe',
+          'loading': 'Chargement en cours...',
+          'empty_input': 'L\'entrée ne peut pas être vide',
+          'forget': 'Mot de passe oublié?',
+          'new_letter_action': 'Cliquez sur moi pour cliquer'
         }
       };
 }

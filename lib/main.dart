@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/controller/AllControllersBinding.dart';
-import 'package:flutter_connected_mailbox/pages/LoginPage.dart';
-import 'package:flutter_connected_mailbox/pages/MainPage.dart';
 import 'package:flutter_connected_mailbox/pages/WelcomePage.dart';
 import 'package:flutter_connected_mailbox/theme/color_schemes.g.dart';
 import 'package:get/get.dart';
@@ -10,13 +8,14 @@ import 'package:get_storage/get_storage.dart';
 
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final bool lang =
-      GetStorage().read('mode') == 'fr' || GetStorage().read('lang') == null;
+      GetStorage().read('lang') == 'fr' || GetStorage().read('lang') == null;
 
   MyApp({Key? key}) : super(key: key);
 
