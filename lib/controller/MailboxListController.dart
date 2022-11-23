@@ -6,8 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/pages/LoginPage.dart';
-
-import '../firebase_options.dart';
+import 'package:flutter_connected_mailbox/firebase_options.dart';
 
 class MailboxListController extends GetxController {
   final box = GetStorage();
