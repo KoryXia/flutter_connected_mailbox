@@ -4,17 +4,11 @@ import 'package:get/get.dart';
 import 'package:flutter_connected_mailbox/components/MailboxListView.dart';
 import 'package:flutter_connected_mailbox/components/UserInfoView.dart';
 import 'package:flutter_connected_mailbox/controller/AppConfigController.dart';
+import 'package:flutter_connected_mailbox/pages/BlueToothPage.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
-  Widget getBody() {
-    return Get.find<AppConfigController>().navigationBarIndex.value == 0
-        ? const MailboxListView()
-        : const UserInfoView();
-  }
-
-  void init() {}
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +25,7 @@ class MainPage extends StatelessWidget {
             currentIndex:
                 Get.find<AppConfigController>().navigationBarIndex.value,
             onTap: (value) {
-              Get.find<AppConfigController>().navigationBarIndex(value);
+              Get.find<AppConfigController>().navigationBarIndex.value = value;
             },
             items: [
               BottomNavigationBarItem(
@@ -45,7 +39,7 @@ class MainPage extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () => Get.to(() => const QRCodePage()),
+            onPressed: () => Get.to(() => BlueToothPage(title: 'Select the interphone',)),
             child: const Icon(Icons.add),
           ),
           floatingActionButtonLocation:
@@ -95,5 +89,11 @@ class MainPage extends StatelessWidget {
             child: getBody(),
           ),
         ));
+  }
+
+  Widget getBody() {
+    return Get.find<AppConfigController>().navigationBarIndex.value == 0
+        ? const MailboxListView()
+        : const UserInfoView();
   }
 }

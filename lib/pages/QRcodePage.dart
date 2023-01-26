@@ -1,6 +1,9 @@
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_connected_mailbox/pages/BlankPage.dart';
+import 'package:flutter_connected_mailbox/pages/MainPage.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:get/get.dart';
 
@@ -107,14 +110,19 @@ class _QRCodePageState extends State<QRCodePage> {
       this.controller!.resumeCamera();
     });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+      result = scanData;
+      controller.pauseCamera();
+      Get.defaultDialog(
+          title: 'success'.tr,
+          middleText: 'success'.tr,
+          confirm: ElevatedButton(
+            child: Text('confirm'.tr),
+            onPressed: () => Get.to(() => const MainPage()),
+          ));
     });
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
-    print('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('no Permission')),

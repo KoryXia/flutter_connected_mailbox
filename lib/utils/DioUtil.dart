@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio/src/form_data.dart' as form_data;
 import 'package:flutter/material.dart';
+import 'package:flutter_connected_mailbox/model/Letters.dart';
 import 'package:flutter_connected_mailbox/model/User.dart';
 import 'package:get/get.dart';
 import 'package:flutter_connected_mailbox/model/MailboxList.dart';
@@ -10,7 +11,7 @@ class DioUtil {
 
   DioUtil()
       : _dio = Dio(BaseOptions(
-            baseUrl: 'http://192.168.0.147:8080/api/',
+            baseUrl: 'http://172.28.27.177:8080/api/',
             connectTimeout: 6000,
             receiveTimeout: 6000,
             responseType: ResponseType.json));
@@ -111,6 +112,26 @@ class DioUtil {
           middleText: 'http_error'.tr,
           confirm:
               ElevatedButton(onPressed: Get.back, child: Text('confirm'.tr)));
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Letters> getLetters(String id) async {
+    try {
+      final response = await _dio.get('letter/$id');
+      if (response.data['msg'] == 'success') {
+        return lettersFromJson(response.data);
+      } else {
+        return Letters(data: null);
+      }
+    } on DioError {
+      Get.defaultDialog(
+          title: 'http_error_title'.tr,
+          middleText: 'http_error'.tr,
+          confirm:
+          ElevatedButton(onPressed: Get.back, child: Text('confirm'.tr)));
       rethrow;
     } catch (e) {
       rethrow;

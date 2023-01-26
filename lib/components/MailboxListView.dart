@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_connected_mailbox/controller/MailboxListController.dart';
+import 'package:flutter_connected_mailbox/pages/LettersPage.dart';
 import 'package:get/get.dart';
 
 class MailboxListView extends StatelessWidget {
@@ -12,77 +13,95 @@ class MailboxListView extends StatelessWidget {
   }
 
   Builder _buildList(int index) {
-    return Builder(
-        builder: (context) {
-          return Container(
-            decoration: BoxDecoration(
-              color: MediaQuery.of(context).platformBrightness == Brightness.light
-                  ? Colors.white
-                  : const Color(0XFF353535),
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 6,
-                  spreadRadius: 1,
-                  color: Colors.black45,
-                  offset: Offset(0, 1),
+    return Builder(builder: (context) {
+      return Container(
+        decoration: BoxDecoration(
+          color: MediaQuery
+              .of(context)
+              .platformBrightness == Brightness.light
+              ? Colors.white
+              : const Color(0XFF353535),
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 6,
+              spreadRadius: 1,
+              color: Colors.black45,
+              offset: Offset(0, 1),
+            )
+          ],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                const SizedBox(width: 45),
+                Get
+                    .find<MailboxListController>()
+                    .mailboxList
+                    .value
+                    .data?[index]
+                    .gotNew ??
+                    false
+                    ? Image.asset(
+                  'PostBoxFull.png',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                )
+                    : Image.asset(
+                  'PostBoxEmpty.png',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(width: 35),
+                Column(
+                  children: [
+                    Text(
+                      Get
+                          .find<MailboxListController>()
+                          .mailboxList
+                          .value
+                          .data?[index]
+                          .nickname ??
+                          '',
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 35,
+                      ),
+                    ),
+                    Text(
+                      Get
+                          .find<MailboxListController>()
+                          .mailboxList
+                          .value
+                          .data?[index]
+                          .screenInfo ??
+                          '',
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
                 )
               ],
-              borderRadius: BorderRadius.circular(16),
             ),
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    const SizedBox(width: 45),
-                    Image.network(
-                      'https://picsum.photos/seed/359/600',
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(width: 35),
-                    Column(
-                      children: [
-                        Text(
-                          Get.find<MailboxListController>()
-                              .mailboxList
-                              .value
-                              .data?[index]
-                              .nickname ??
-                              '',
-                          style: const TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 35,
-                          ),
-                        ),
-                        Text(
-                          Get.find<MailboxListController>()
-                              .mailboxList
-                              .value
-                              .data?[index]
-                              .screenInfo ??
-                              '',
-                          style: const TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
-          );
-        }
-    );
+            const SizedBox(height: 10),
+          ],
+        ),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (Get.find<MailboxListController>().isLoading.value) {
+      if (Get
+          .find<MailboxListController>()
+          .isLoading
+          .value) {
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +111,11 @@ class MailboxListView extends StatelessWidget {
           ),
         );
       } else {
-        if (Get.find<MailboxListController>().mailboxList.value.data != null) {
+        if (Get
+            .find<MailboxListController>()
+            .mailboxList
+            .value
+            .data != null) {
           return RefreshIndicator(
             onRefresh: _onRefresh,
             child: Scrollbar(
@@ -100,7 +123,8 @@ class MailboxListView extends StatelessWidget {
               radius: const Radius.circular(6),
               child: ListView.builder(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
-                itemCount: Get.find<MailboxListController>()
+                itemCount: Get
+                    .find<MailboxListController>()
                     .mailboxList
                     .value
                     .data
@@ -108,22 +132,29 @@ class MailboxListView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      print(index);
+                      Get.to(() => LettersPage(), arguments: Get
+                          .find<MailboxListController>()
+                          .mailboxList
+                          .value
+                          .data?[index]
+                          .mailboxId ??
+                          "");
                     },
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        Get.find<MailboxListController>()
-                                    .mailboxList
-                                    .value
-                                    .data?[index]
-                                    .gotNew ??
-                                false
+                        Get
+                            .find<MailboxListController>()
+                            .mailboxList
+                            .value
+                            .data?[index]
+                            .gotNew ??
+                            false
                             ? Banner(
-                                message: 'new_letter'.tr,
-                                location: BannerLocation.topEnd,
-                                child: _buildList(index),
-                              )
+                          message: 'new_letter'.tr,
+                          location: BannerLocation.topEnd,
+                          child: _buildList(index),
+                        )
                             : _buildList(index),
                       ],
                     ),

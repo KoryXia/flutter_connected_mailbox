@@ -23,7 +23,9 @@ class LocaleString extends Translations {
           'loading': 'Loading...',
           'empty_input': 'Input can not be empty',
           'forget': 'Forget the password?',
-          'new_letter_action': 'Click me to check.'
+          'new_letter_action': 'Click me to check.',
+          'letters': 'Letters',
+          'success': 'Success'
         },
         'fr_FR': {
           'confirm': 'Confirmer',
@@ -45,7 +47,9 @@ class LocaleString extends Translations {
           'loading': 'Chargement en cours...',
           'empty_input': 'L\'entrée ne peut pas être vide',
           'forget': 'Mot de passe oublié?',
-          'new_letter_action': 'Cliquez sur moi pour cliquer'
+          'new_letter_action': 'Cliquez sur moi pour cliquer',
+          'letters': 'Lettres',
+          'success': 'Succès'
         }
       };
 }
